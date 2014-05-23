@@ -1,4 +1,2 @@
-removed_sources:
-  weston-1.2.1.tar.xz: 111e639940ff06c6b8f3fcb866b53449a5690d3e
 sources:
-  weston-1.2.2.tar.xz: b08d0c15b5eef65d5f7b864fe393b27f981f97f7
+  weston-1.5.0.tar.xz: 42939c536bcdfbd92edb5e51af76ce7f0a4c6ed7
