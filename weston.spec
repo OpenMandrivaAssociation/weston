@@ -80,7 +80,7 @@ Common headers for weston
 autoreconf -vfi
 %configure2_5x \
 		--disable-setuid-install \
-        --enable-demo-clients-install \\
+        --enable-demo-clients-install \
         --enable-screen-sharing
 %make
 
