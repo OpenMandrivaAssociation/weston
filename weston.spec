@@ -1,7 +1,7 @@
 Summary:	The Weston Wayland Compositor
 Name:		weston
 Version:	1.5.0
-Release:	1
+Release:	2
 Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
 License:	MIT
 Group:		Graphics
@@ -13,6 +13,7 @@ BuildRequires:	pkgconfig(cairo-egl) >= 1.11.3
 %endif
 BuildRequires:	pkgconfig(cairo-xcb)
 BuildRequires:	pkgconfig(colord) >= 0.1.27
+BuildRequires:	pkgconfig(dbus-1)
 BuildRequires:	pkgconfig(egl) >= 7.10
 BuildRequires:	pkgconfig(gbm)
 BuildRequires:	pkgconfig(gio-2.0)
@@ -27,6 +28,7 @@ BuildRequires:	pkgconfig(libsystemd-login)
 BuildRequires:	pkgconfig(libudev) >= 136
 BuildRequires:	pkgconfig(libunwind)
 BuildRequires:	pkgconfig(libwebp)
+BuildRequires:	pkgconfig(libva-x11)
 BuildRequires:	pkgconfig(mtdev) >= 1.1.0
 BuildRequires:	pkgconfig(pangocairo)
 BuildRequires:	pkgconfig(pixman-1)
@@ -76,7 +78,10 @@ Common headers for weston
 
 %build
 autoreconf -vfi
-%configure2_5x --disable-setuid-install --enable-demo-clients
+%configure2_5x \
+		--disable-setuid-install \
+        --enable-demo-clients-install \\
+        --enable-screen-sharing
 %make
 
 %install
