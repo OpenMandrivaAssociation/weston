@@ -102,24 +102,7 @@ done
 %{_mandir}/man*/*
 
 %files demos
-%{_bindir}/%{name}-calibrator
-%{_bindir}/%{name}-clickdot
-%{_bindir}/%{name}-cliptest
-%{_bindir}/%{name}-dnd
-%{_bindir}/%{name}-editor
-%{_bindir}/%{name}-eventdemo
-%{_bindir}/%{name}-flower
-%{_bindir}/%{name}-subsurfaces
-%{_bindir}/%{name}-fullscreen
-#% {_bindir}/%{name}-gears
-%{_bindir}/%{name}-image
-%{_bindir}/%{name}-resizor
-%{_bindir}/%{name}-simple-egl
-%{_bindir}/%{name}-simple-shm
-%{_bindir}/%{name}-simple-touch
-%{_bindir}/%{name}-smoke
-%{_bindir}/%{name}-transformed
-%{_bindir}/%{name}-view
+
 
 %files devel
 %{_includedir}/weston/*.h
