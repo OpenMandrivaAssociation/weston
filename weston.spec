@@ -107,7 +107,25 @@ done
 %{_mandir}/man*/*
 
 %files demos
-
+%{_bindir}/weston-calibrator
+%{_bindir}/weston-clickdot
+%{_bindir}/weston-cliptest
+%{_bindir}/weston-dnd
+%{_bindir}/weston-editor
+%{_bindir}/weston-eventdemo
+%{_bindir}/weston-flower
+%{_bindir}/weston-fullscreen
+%{_bindir}/weston-image
+%{_bindir}/weston-multi-resource
+%{_bindir}/weston-resizor
+%{_bindir}/weston-scaler
+%{_bindir}/weston-simple-egl
+%{_bindir}/weston-simple-shm
+%{_bindir}/weston-simple-touch
+%{_bindir}/weston-smoke
+%{_bindir}/weston-stacking
+%{_bindir}/weston-subsurfaces
+%{_bindir}/weston-transformed
 
 %files devel
 %{_includedir}/weston/*.h
