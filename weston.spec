@@ -32,11 +32,11 @@ BuildRequires:	pkgconfig(libwebp)
 BuildRequires:	pkgconfig(libva-x11)
 BuildRequires:	pkgconfig(mtdev) >= 1.1.0
 BuildRequires:	pkgconfig(pangocairo)
-BuildRequires:	pkgconfig(pixman-1)
+BuildRequires:	pkgconfig(pixman-1) >= 0.25.2
 BuildRequires:	pkgconfig(poppler-glib)
 BuildRequires:	pkgconfig(wayland-client)
 BuildRequires:	pkgconfig(wayland-cursor)
-BuildRequires:	pkgconfig(wayland-server) >= 1.1.90
+BuildRequires:	pkgconfig(wayland-server) >= %{version}
 BuildRequires:	pkgconfig(x11)
 BuildRequires:	pkgconfig(x11-xcb)
 BuildRequires:	pkgconfig(xcb)
@@ -44,7 +44,7 @@ BuildRequires:	pkgconfig(xcb-dri2)
 BuildRequires:	pkgconfig(xcb-shm)
 BuildRequires:	pkgconfig(xcb-xfixes)
 BuildRequires:	pkgconfig(xcursor)
-BuildRequires:	pkgconfig(xkbcommon)
+BuildRequires:	pkgconfig(xkbcommon) >= 0.3.0
 BuildRequires:	pam-devel
 BuildRequires:	jpeg-devel
 
