@@ -23,6 +23,7 @@ BuildRequires:	pkgconfig(glu)
 BuildRequires:	pkgconfig(gobject-2.0)
 BuildRequires:	pkgconfig(lcms2)
 BuildRequires:	pkgconfig(libdrm) >= 2.4.30
+BuildRequires:	pkgconfig(libinput)
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(libsystemd-login)
 BuildRequires:	pkgconfig(libudev) >= 136
