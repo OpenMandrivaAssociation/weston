@@ -128,6 +128,7 @@ done
 %{_bindir}/weston-stacking
 %{_bindir}/weston-subsurfaces
 %{_bindir}/weston-transformed
+%{_bindir}/weston-simple-damage
 
 %files devel
 %{_includedir}/weston/*.h
