@@ -1,7 +1,7 @@
 Summary:	The Weston Wayland Compositor
 Name:		weston
-Version:	1.5.0
-Release:	4
+Version:	1.6.0
+Release:	1
 Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
 License:	MIT
 Group:		Graphics
@@ -78,7 +78,7 @@ Common headers for weston
 
 %build
 autoreconf -vfi
-%configure2_5x \
+%configure \
 		--disable-setuid-install \
         --enable-demo-clients-install \
         --enable-screen-sharing
