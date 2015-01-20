@@ -6,6 +6,8 @@ Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
 License:	MIT
 Group:		Graphics
 Url:		http://wayland.freedesktop.org/
+Patch0:		0001-libinput-device-use-the-new-merged-scroll-events.patch
+Patch1:		0001-libinput-device-use-the-discrete-axis-value-for-whee.patch
 BuildRequires:	pkgconfig(cairo) >= 1.10.0
 BuildRequires:	pkgconfig(wayland-egl)
 %ifarch	%arm aarch64
@@ -77,11 +79,12 @@ Common headers for weston
 
 %prep
 %setup -q
+%apply_patches
 
 %build
 autoreconf -vfi
 %configure \
-		--disable-setuid-install \
+	--disable-setuid-install \
         --enable-demo-clients-install \
         --enable-screen-sharing
 %make
