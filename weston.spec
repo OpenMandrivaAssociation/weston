@@ -1,16 +1,14 @@
 Summary:	The Weston Wayland Compositor
 Name:		weston
-Version:	1.6.0
-Release:	5
+Version:	1.6.91
+Release:	1
 Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
 License:	MIT
 Group:		Graphics
 Url:		http://wayland.freedesktop.org/
-Patch0:		0001-libinput-device-use-the-new-merged-scroll-events.patch
-Patch1:		0001-libinput-device-use-the-discrete-axis-value-for-whee.patch
 BuildRequires:	pkgconfig(cairo) >= 1.10.0
 BuildRequires:	pkgconfig(wayland-egl)
-%ifarch	%arm aarch64
+%ifarch	%armx
 BuildRequires:	pkgconfig(cairo-egl) >= 1.11.3
 %endif
 BuildRequires:	pkgconfig(cairo-xcb)
@@ -132,6 +130,7 @@ done
 %{_bindir}/weston-subsurfaces
 %{_bindir}/weston-transformed
 %{_bindir}/weston-simple-damage
+%{_bindir}/weston-presentation-shm
 
 %files devel
 %{_includedir}/weston/*.h
