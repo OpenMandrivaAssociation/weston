@@ -6,6 +6,12 @@ Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
 License:	MIT
 Group:		Graphics
 Url:		http://wayland.freedesktop.org/
+# not move me
+#Patch0:		0001-ENGR00314805-1-Add-Vivante-EGL-support.patch
+#Patch1:		0002-ENGR00314805-2-Add-Vivante-GAL2D-support.patch
+#Patch2:		0003-Distorted-line-and-shadow-if-use-2d-com.patch
+#Patch3:		0005-Enable-GAL2D-compositor-in-SoloLite.patch
+#Patch4:		0006-Change-GAL2D-compositor-to-be-default-i.patch
 BuildRequires:	pkgconfig(cairo) >= 1.10.0
 BuildRequires:	pkgconfig(wayland-egl)
 %ifarch	%armx
@@ -83,6 +89,7 @@ Common headers for weston
 autoreconf -vfi
 %configure \
 	--disable-setuid-install \
+	--enable-xwayland \
         --enable-demo-clients-install \
         --enable-screen-sharing
 %make
