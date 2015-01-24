@@ -1,8 +1,9 @@
 Summary:	The Weston Wayland Compositor
 Name:		weston
 Version:	1.6.91
-Release:	1
+Release:	2
 Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
+Source1:	weston.ini
 License:	MIT
 Group:		Graphics
 Url:		http://wayland.freedesktop.org/
@@ -102,7 +103,11 @@ for d in $(find clients/ -type f -not -name Makefile -and -not -name '*.*' -and 
     install -m755 $d %{buildroot}%{_bindir}/%{name}-$(basename $d)
 done
 
+mkdir -p %{buildroot}%{_sysconfdir}/xdg/weston
+install -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/xdg/weston/weston.ini
+
 %files
+%config(noreplace) %{_sysconfdir}/xdg/weston/weston.ini
 %{_bindir}/%{name}
 %{_bindir}/wcap-decode
 %attr(4755,root,root) %{_bindir}/%{name}-launch
