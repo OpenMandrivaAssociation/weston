@@ -117,6 +117,7 @@ install -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/xdg/weston/weston.ini
 %dir %{_libdir}/%{name}
 %{_libdir}/%{name}/*.so
 %dir %{_datadir}/%{name}
+%{_datadir}/wayland-sessions/weston.desktop
 %{_datadir}/%{name}/*.png
 %{_datadir}/%{name}/*.svg
 %{_mandir}/man*/*
