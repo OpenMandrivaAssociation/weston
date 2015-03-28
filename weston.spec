@@ -113,6 +113,7 @@ cat > %{buildroot}%{_presetdir}/86-weston.preset << EOF
 enable weston.service
 EOF
 
+mkdir -p %{buildroot}%{_userunitdir}/
 install -m 644 %{SOURCE2} %{buildroot}%{_userunitdir}/weston.service
 
 %post
