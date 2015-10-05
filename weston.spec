@@ -1,7 +1,7 @@
 Summary:	The Weston Wayland Compositor
 Name:		weston
-Version:	1.7.0
-Release:	6
+Version:	1.8.0
+Release:	1
 Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
 Source1:	weston.ini
 Source2:	weston.service
@@ -35,7 +35,7 @@ BuildRequires:	pkgconfig(libinput)
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(libsystemd-login)
 BuildRequires:	pkgconfig(libudev) >= 136
-BuildRequires:	pkgconfig(libunwind)
+#BuildRequires:	pkgconfig(libunwind)
 BuildRequires:	pkgconfig(libwebp)
 BuildRequires:	pkgconfig(libva-x11)
 BuildRequires:	pkgconfig(mtdev) >= 1.1.0
@@ -88,7 +88,6 @@ Common headers for weston
 %apply_patches
 
 %build
-autoreconf -vfi
 %configure \
 	--disable-setuid-install \
 	--enable-xwayland \
