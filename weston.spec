@@ -1,3 +1,5 @@
+%define _disable_lto 1
+
 Summary:	The Weston Wayland Compositor
 Name:		weston
 Version:	1.8.0
