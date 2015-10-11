@@ -1,7 +1,7 @@
 Summary:	The Weston Wayland Compositor
 Name:		weston
 Version:	1.8.0
-Release:	1
+Release:	2
 Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
 Source1:	weston.ini
 Source2:	weston.service
@@ -54,6 +54,7 @@ BuildRequires:	pkgconfig(xcb-xfixes)
 BuildRequires:	pkgconfig(xcursor)
 BuildRequires:	pkgconfig(xkbcommon) >= 0.3.0
 BuildRequires:	pkgconfig(libsystemd)
+BuildRequires:	pkgconfig(freerdp)
 BuildRequires:	pam-devel
 BuildRequires:	jpeg-devel
 
@@ -91,8 +92,18 @@ Common headers for weston
 %configure \
 	--disable-setuid-install \
 	--enable-xwayland \
-        --enable-demo-clients-install \
-        --enable-screen-sharing
+    --enable-demo-clients-install \
+    --enable-screen-sharing \
+    --enable-drm-compositor \
+    --enable-wayland-compositor \
+    --disable-xwayland-test \
+    --enable-rdp-compositor \
+    --enable-vaapi-recorder \
+    --enable-clients \
+    --enable-systemd-login \
+    --enable-weston-launch \
+    --enable-systemd-notify
+
 %make
 
 %install
