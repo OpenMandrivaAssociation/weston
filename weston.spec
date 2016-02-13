@@ -3,7 +3,7 @@
 Summary:	The Weston Wayland Compositor
 Name:		weston
 Version:	1.8.0
-Release:	2
+Release:	3
 Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
 Source1:	weston.ini
 Source2:	weston.service
@@ -92,8 +92,8 @@ Common headers for weston
 
 %build
 %configure \
-	--disable-setuid-install \
-	--enable-xwayland \
+    --disable-setuid-install \
+    --enable-xwayland \
     --enable-demo-clients-install \
     --enable-screen-sharing \
     --enable-drm-compositor \
