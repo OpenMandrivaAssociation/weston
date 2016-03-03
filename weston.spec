@@ -37,6 +37,7 @@ BuildRequires:	pkgconfig(libdrm) >= 2.4.30
 BuildRequires:	pkgconfig(libinput)
 BuildRequires:	pkgconfig(libpng)
 BuildRequires:	pkgconfig(libsystemd-login)
+BuildRequires:	pkgconfig(libsystemd-daemon)
 BuildRequires:	pkgconfig(libudev) >= 136
 #BuildRequires:	pkgconfig(libunwind)
 BuildRequires:	pkgconfig(libwebp)
