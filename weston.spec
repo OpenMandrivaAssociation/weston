@@ -18,6 +18,7 @@ Url:		http://wayland.freedesktop.org/
 #Patch4:		0006-Change-GAL2D-compositor-to-be-default-i.patch
 BuildRequires:	pkgconfig(cairo) >= 1.10.0
 BuildRequires:	pkgconfig(wayland-egl)
+BuildRequires:	pkgconfig(wayland-protocols)
 %ifarch	%armx
 BuildRequires:	pkgconfig(cairo-egl) >= 1.11.3
 %endif
