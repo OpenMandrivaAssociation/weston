@@ -164,7 +164,9 @@ install -m 644 %{SOURCE2} %{buildroot}%{_userunitdir}/weston.service
 %{_bindir}/weston-multi-resource
 %{_bindir}/weston-resizor
 %{_bindir}/weston-scaler
+%ifarch %{ix86} x86_64
 %{_bindir}/weston-simple-dmabuf-intel
+%endif
 %{_bindir}/weston-simple-dmabuf-v4l
 %{_bindir}/weston-simple-egl
 %{_bindir}/weston-simple-shm
