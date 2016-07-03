@@ -2,7 +2,7 @@
 
 Summary:	The Weston Wayland Compositor
 Name:		weston
-Version:	1.10.0
+Version:	1.11.0
 Release:	1
 Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
 Source1:	weston.ini
@@ -122,21 +122,18 @@ mkdir -p %{buildroot}%{_sysconfdir}/xdg/weston
 install -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/xdg/weston/weston.ini
 
 
-install -d %{buildroot}%{_presetdir}
-cat > %{buildroot}%{_presetdir}/86-weston.preset << EOF
+install -d %{buildroot}%{_userpresetdir}
+cat > %{buildroot}%{_userpresetdir}/86-weston.preset << EOF
 enable weston.service
 EOF
 
 mkdir -p %{buildroot}%{_userunitdir}/
 install -m 644 %{SOURCE2} %{buildroot}%{_userunitdir}/weston.service
 
-%post
-/bin/systemctl --user --global enable weston.service >/dev/null 2>&1 || :
-
 %files
 %config(noreplace) %{_sysconfdir}/xdg/weston/weston.ini
 %{_userunitdir}/weston.service
-%{_presetdir}/86-weston.preset
+%{_userpresetdir}/86-weston.preset
 %{_bindir}/%{name}
 %{_bindir}/wcap-decode
 %attr(4755,root,root) %{_bindir}/%{name}-launch
