@@ -36,8 +36,6 @@ BuildRequires:	pkgconfig(lcms2)
 BuildRequires:	pkgconfig(libdrm) >= 2.4.30
 BuildRequires:	pkgconfig(libinput)
 BuildRequires:	pkgconfig(libpng)
-BuildRequires:	pkgconfig(libsystemd-login)
-BuildRequires:	pkgconfig(libsystemd-daemon)
 BuildRequires:	pkgconfig(libudev) >= 136
 #BuildRequires:	pkgconfig(libunwind)
 BuildRequires:	pkgconfig(libwebp)
@@ -81,10 +79,10 @@ This package contains a few example clients for Weston, from simple
 clients that demonstrate certain aspects of the protocol to more
 complete clients and a simplistic toolkit demo clients for Weston.
 
-
 %package devel
 Summary: Common headers for weston
 License: MIT
+
 %description devel
 Common headers for weston
 
