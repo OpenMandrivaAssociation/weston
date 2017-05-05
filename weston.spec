@@ -2,7 +2,7 @@
 
 Summary:	The Weston Wayland Compositor
 Name:		weston
-Version:	1.11.0
+Version:	2.0.0
 Release:	1
 Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
 Source1:	weston.ini
@@ -104,7 +104,9 @@ Common headers for weston
     --enable-clients \
     --enable-systemd-login \
     --enable-weston-launch \
-    --enable-systemd-notify
+    --enable-systemd-notify \
+    --with-cairo=glesv2 \
+    --with-cairo-glesv2
 
 %make
 
