@@ -2,7 +2,7 @@
 
 Summary:	The Weston Wayland Compositor
 Name:		weston
-Version:	2.0.0
+Version:	3.0.0
 Release:	1
 Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
 Source1:	weston.ini
@@ -46,7 +46,7 @@ BuildRequires:	pkgconfig(pixman-1) >= 0.25.2
 BuildRequires:	pkgconfig(poppler-glib)
 BuildRequires:	pkgconfig(wayland-client)
 BuildRequires:	pkgconfig(wayland-cursor)
-BuildRequires:	pkgconfig(wayland-server) >= %{version}
+BuildRequires:	pkgconfig(wayland-server) >= 1.14.0
 BuildRequires:	pkgconfig(x11)
 BuildRequires:	pkgconfig(x11-xcb)
 BuildRequires:	pkgconfig(xcb)
