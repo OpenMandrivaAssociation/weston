@@ -97,14 +97,12 @@ Common headers for weston
     --enable-drm-compositor \
     --enable-wayland-compositor \
     --disable-xwayland-test \
-    --disable-rdp-compositor \
+    --enable-rdp-compositor \
     --enable-vaapi-recorder \
     --enable-clients \
     --enable-systemd-login \
     --enable-weston-launch \
-    --enable-systemd-notify \
-    --with-cairo=glesv2 \
-    --with-cairo-glesv2
+    --enable-systemd-notify
 
 %make
 
