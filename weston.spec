@@ -19,9 +19,7 @@ Url:		http://wayland.freedesktop.org/
 BuildRequires:	pkgconfig(cairo) >= 1.10.0
 BuildRequires:	pkgconfig(wayland-egl)
 BuildRequires:	pkgconfig(wayland-protocols)
-%ifarch	%armx
 BuildRequires:	pkgconfig(cairo-egl) >= 1.11.3
-%endif
 BuildRequires:	pkgconfig(cairo-xcb)
 BuildRequires:	pkgconfig(colord) >= 0.1.27
 BuildRequires:	pkgconfig(dbus-1)
