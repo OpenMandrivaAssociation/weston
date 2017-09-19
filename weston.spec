@@ -54,7 +54,7 @@ BuildRequires:	pkgconfig(xcb-xfixes)
 BuildRequires:	pkgconfig(xcursor)
 BuildRequires:	pkgconfig(xkbcommon) >= 0.3.0
 BuildRequires:	pkgconfig(libsystemd)
-#BuildRequires:	pkgconfig(freerdp)
+BuildRequires:	pkgconfig(freerdp)
 BuildRequires:	pam-devel
 BuildRequires:	jpeg-devel
 
