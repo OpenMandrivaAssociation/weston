@@ -58,6 +58,9 @@ BuildRequires:	pkgconfig(libsystemd)
 BuildRequires:	pam-devel
 BuildRequires:	jpeg-devel
 
+%libpackage weston-3 0
+%libpackage weston-desktop-3 0
+
 %description
 Weston is the reference implementation of a Wayland compositor, and a
 useful compositor in its own right. Weston has various backends that
@@ -138,6 +141,14 @@ install -m 644 %{SOURCE2} %{buildroot}%{_userunitdir}/weston.service
 %{_libexecdir}/%{name}-*
 %dir %{_libdir}/%{name}
 %{_libdir}/%{name}/*.so
+%dir %{_libdir}/libweston-3
+%{_libdir}/libweston-3/drm-backend.so
+%{_libdir}/libweston-3/fbdev-backend.so
+%{_libdir}/libweston-3/gl-renderer.so
+%{_libdir}/libweston-3/headless-backend.so
+%{_libdir}/libweston-3/wayland-backend.so
+%{_libdir}/libweston-3/x11-backend.so
+%{_libdir}/libweston-3/xwayland.so
 %dir %{_datadir}/%{name}
 %{_datadir}/wayland-sessions/weston.desktop
 %{_datadir}/%{name}/*.png
@@ -148,6 +159,7 @@ install -m 644 %{SOURCE2} %{buildroot}%{_userunitdir}/weston.service
 %{_bindir}/weston-calibrator
 %{_bindir}/weston-clickdot
 %{_bindir}/weston-cliptest
+%{_bindir}/weston-confine
 %{_bindir}/weston-dnd
 %{_bindir}/weston-editor
 %{_bindir}/weston-eventdemo
@@ -157,9 +169,7 @@ install -m 644 %{SOURCE2} %{buildroot}%{_userunitdir}/weston.service
 %{_bindir}/weston-multi-resource
 %{_bindir}/weston-resizor
 %{_bindir}/weston-scaler
-%ifarch %{ix86} x86_64
-%{_bindir}/weston-simple-dmabuf-intel
-%endif
+%{_bindir}/weston-simple-dmabuf-drm
 %{_bindir}/weston-simple-dmabuf-v4l
 %{_bindir}/weston-simple-egl
 %{_bindir}/weston-simple-shm
@@ -172,5 +182,9 @@ install -m 644 %{SOURCE2} %{buildroot}%{_userunitdir}/weston.service
 %{_bindir}/weston-presentation-shm
 
 %files devel
-%{_includedir}/weston/*.h
+%{_includedir}/weston
+%{_includedir}/libweston-3
 %{_libdir}/pkgconfig/weston.pc
+%{_libdir}/pkgconfig/libweston-3.pc
+%{_libdir}/pkgconfig/libweston-desktop-3.pc
+%{_libdir}/lib*.so
