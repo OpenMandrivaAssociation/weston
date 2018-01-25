@@ -1,0 +1,15 @@
+--- weston-3.0.0/compositor/main.c.omv~	2018-01-25 22:11:30.795505096 +0100
++++ weston-3.0.0/compositor/main.c	2018-01-25 22:13:23.245392671 +0100
+@@ -758,6 +758,12 @@ weston_create_listening_socket(struct wl
+ 
+ 	setenv("WAYLAND_DISPLAY", socket_name, 1);
+ 
++	/* Tell common toolkits to do the right thing... */
++	setenv("QT_QPA_PLATFORM", "wayland", 1);
++	setenv("SDL_VIDEODRIVER", "wayland", 1);
++	setenv("GDK_BACKEND", "wayland", 1);
++	setenv("CLUTTER_BACKEND", "wayland", 1);
++
+ 	return 0;
+ }
+ 

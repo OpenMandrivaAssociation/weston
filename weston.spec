@@ -16,6 +16,7 @@ Url:		http://wayland.freedesktop.org/
 #Patch2:		0003-Distorted-line-and-shadow-if-use-2d-com.patch
 #Patch3:		0005-Enable-GAL2D-compositor-in-SoloLite.patch
 #Patch4:		0006-Change-GAL2D-compositor-to-be-default-i.patch
+Patch10:	weston-3.0.0-toolkits-use-wayland.patch
 BuildRequires:	pkgconfig(cairo) >= 1.10.0
 BuildRequires:	pkgconfig(wayland-egl)
 BuildRequires:	pkgconfig(wayland-protocols)
