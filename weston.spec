@@ -1,3 +1,6 @@
+%define abi 4
+%define major 0
+
 %define _disable_lto 1
 
 Summary:	The Weston Wayland Compositor
@@ -59,8 +62,8 @@ BuildRequires:	pkgconfig(libsystemd)
 BuildRequires:	pam-devel
 BuildRequires:	jpeg-devel
 
-%libpackage weston-3 0
-%libpackage weston-desktop-3 0
+%libpackage weston-%{abi} %{major}
+%libpackage weston-desktop-%{abi} %{major}
 
 %description
 Weston is the reference implementation of a Wayland compositor, and a
@@ -142,14 +145,14 @@ install -m 644 %{SOURCE2} %{buildroot}%{_userunitdir}/weston.service
 %{_libexecdir}/%{name}-*
 %dir %{_libdir}/%{name}
 %{_libdir}/%{name}/*.so
-%dir %{_libdir}/libweston-4
-%{_libdir}/libweston-4/drm-backend.so
-%{_libdir}/libweston-4/fbdev-backend.so
-%{_libdir}/libweston-4/gl-renderer.so
-%{_libdir}/libweston-4/headless-backend.so
-%{_libdir}/libweston-4/wayland-backend.so
-%{_libdir}/libweston-4/x11-backend.so
-%{_libdir}/libweston-4/xwayland.so
+%dir %{_libdir}/libweston-%{abi}
+%{_libdir}/libweston-%{abi}/drm-backend.so
+%{_libdir}/libweston-%{abi}/fbdev-backend.so
+%{_libdir}/libweston-%{abi}/gl-renderer.so
+%{_libdir}/libweston-%{abi}/headless-backend.so
+%{_libdir}/libweston-%{abi}/wayland-backend.so
+%{_libdir}/libweston-%{abi}/x11-backend.so
+%{_libdir}/libweston-%{abi}/xwayland.so
 %dir %{_datadir}/%{name}
 %{_datadir}/wayland-sessions/weston.desktop
 %{_datadir}/%{name}/*.png
@@ -184,8 +187,8 @@ install -m 644 %{SOURCE2} %{buildroot}%{_userunitdir}/weston.service
 
 %files devel
 %{_includedir}/weston
-%{_includedir}/libweston-3
+%{_includedir}/libweston-%{abi}
 %{_libdir}/pkgconfig/weston.pc
-%{_libdir}/pkgconfig/libweston-3.pc
-%{_libdir}/pkgconfig/libweston-desktop-3.pc
+%{_libdir}/pkgconfig/libweston-%{abi}.pc
+%{_libdir}/pkgconfig/libweston-desktop-%{abi}.pc
 %{_libdir}/lib*.so
