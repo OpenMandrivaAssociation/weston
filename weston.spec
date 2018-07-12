@@ -2,8 +2,8 @@
 
 Summary:	The Weston Wayland Compositor
 Name:		weston
-Version:	3.0.0
-Release:	2
+Version:	4.0.0
+Release:	1
 Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
 Source1:	weston.ini
 Source2:	weston.service
@@ -142,14 +142,14 @@ install -m 644 %{SOURCE2} %{buildroot}%{_userunitdir}/weston.service
 %{_libexecdir}/%{name}-*
 %dir %{_libdir}/%{name}
 %{_libdir}/%{name}/*.so
-%dir %{_libdir}/libweston-3
-%{_libdir}/libweston-3/drm-backend.so
-%{_libdir}/libweston-3/fbdev-backend.so
-%{_libdir}/libweston-3/gl-renderer.so
-%{_libdir}/libweston-3/headless-backend.so
-%{_libdir}/libweston-3/wayland-backend.so
-%{_libdir}/libweston-3/x11-backend.so
-%{_libdir}/libweston-3/xwayland.so
+%dir %{_libdir}/libweston-4
+%{_libdir}/libweston-4/drm-backend.so
+%{_libdir}/libweston-4/fbdev-backend.so
+%{_libdir}/libweston-4/gl-renderer.so
+%{_libdir}/libweston-4/headless-backend.so
+%{_libdir}/libweston-4/wayland-backend.so
+%{_libdir}/libweston-4/x11-backend.so
+%{_libdir}/libweston-4/xwayland.so
 %dir %{_datadir}/%{name}
 %{_datadir}/wayland-sessions/weston.desktop
 %{_datadir}/%{name}/*.png
