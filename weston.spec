@@ -58,7 +58,7 @@ BuildRequires:	pkgconfig(xcb-xfixes)
 BuildRequires:	pkgconfig(xcursor)
 BuildRequires:	pkgconfig(xkbcommon) >= 0.3.0
 BuildRequires:	pkgconfig(libsystemd)
-BuildRequires:	pkgconfig(freerdp2)
+#BuildRequires:	pkgconfig(freerdp2)
 BuildRequires:	pam-devel
 BuildRequires:	jpeg-devel
 
@@ -104,7 +104,7 @@ Common headers for weston
     --enable-drm-compositor \
     --enable-wayland-compositor \
     --disable-xwayland-test \
-    --enable-rdp-compositor \
+    --disable-rdp-compositor \
     --enable-vaapi-recorder \
     --enable-clients \
     --enable-systemd-login \
