@@ -1,11 +1,11 @@
-%define abi 4
+%define abi 5
 %define major 0
 
 %define _disable_lto 1
 
 Summary:	The Weston Wayland Compositor
 Name:		weston
-Version:	4.0.0
+Version:	5.0.0
 Release:	1
 Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
 Source1:	weston.ini
