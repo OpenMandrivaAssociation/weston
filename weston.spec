@@ -61,6 +61,7 @@ BuildRequires:	pkgconfig(libsystemd)
 #BuildRequires:	pkgconfig(freerdp2)
 BuildRequires:	pam-devel
 BuildRequires:	jpeg-devel
+Requires:	xkeyboard-config
 
 %libpackage weston-%{abi} %{major}
 %libpackage weston-desktop-%{abi} %{major}
