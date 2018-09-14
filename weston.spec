@@ -93,8 +93,7 @@ License: MIT
 Common headers for weston
 
 %prep
-%setup -q
-%apply_patches
+%autosetup -p1
 
 %build
 %configure \
@@ -112,10 +111,10 @@ Common headers for weston
     --enable-weston-launch \
     --enable-systemd-notify
 
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 rm -f %{buildroot}%{_libdir}/%{name}/*.la
 
 for d in $(find clients/ -type f -not -name Makefile -and -not -name '*.*' -and -not -name '%{name}-*'); do
