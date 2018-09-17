@@ -142,6 +142,7 @@ install -m 644 %{SOURCE2} %{buildroot}%{_userunitdir}/weston.service
 %attr(4755,root,root) %{_bindir}/%{name}-launch
 %{_bindir}/%{name}-info
 %{_bindir}/%{name}-terminal
+%{_bindir}/%{name}-touch-calibrator
 %{_libexecdir}/%{name}-*
 %dir %{_libdir}/%{name}
 %{_libdir}/%{name}/*.so
