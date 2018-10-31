@@ -6,7 +6,7 @@
 Summary:	The Weston Wayland Compositor
 Name:		weston
 Version:	5.0.0
-Release:	1
+Release:	2
 Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
 Source1:	weston.ini
 Source2:	weston.service
