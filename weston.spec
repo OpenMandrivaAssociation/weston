@@ -101,7 +101,12 @@ Common headers for weston
 
 %build
 %meson \
-    -Dtest-junit-xml=false
+    -Dtest-junit-xml=false \
+%ifnarch %{armx}
+    -Dsimple-dmabuf-drm=intel
+%else
+    -Dsimple-dmabuf-drm="freedreno,etnaviv"
+%endif
 
 %meson_build
 
