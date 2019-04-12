@@ -20,6 +20,7 @@ Url:		http://wayland.freedesktop.org/
 #Patch3:		0005-Enable-GAL2D-compositor-in-SoloLite.patch
 #Patch4:		0006-Change-GAL2D-compositor-to-be-default-i.patch
 Patch10:	weston-3.0.0-toolkits-use-wayland.patch
+BuildRequires:	meson
 BuildRequires:	pkgconfig(cairo) >= 1.10.0
 BuildRequires:	pkgconfig(wayland-egl)
 BuildRequires:	pkgconfig(wayland-protocols)
@@ -58,7 +59,7 @@ BuildRequires:	pkgconfig(xcb-xfixes)
 BuildRequires:	pkgconfig(xcursor)
 BuildRequires:	pkgconfig(xkbcommon) >= 0.3.0
 BuildRequires:	pkgconfig(libsystemd)
-#BuildRequires:	pkgconfig(freerdp2)
+BuildRequires:	pkgconfig(freerdp2)
 BuildRequires:	pam-devel
 BuildRequires:	jpeg-devel
 Requires:	xkeyboard-config
@@ -96,25 +97,13 @@ Common headers for weston
 %autosetup -p1
 
 %build
-%configure \
-    --disable-setuid-install \
-    --enable-xwayland \
-    --enable-demo-clients-install \
-    --enable-screen-sharing \
-    --enable-drm-compositor \
-    --enable-wayland-compositor \
-    --disable-xwayland-test \
-    --disable-rdp-compositor \
-    --enable-vaapi-recorder \
-    --enable-clients \
-    --enable-systemd-login \
-    --enable-weston-launch \
-    --enable-systemd-notify
+%meson \
+    -Dtest-junit-xml=false
 
-%make_build
+%meson_build
 
 %install
-%make_install
+%meson_install
 rm -f %{buildroot}%{_libdir}/%{name}/*.la
 
 for d in $(find clients/ -type f -not -name Makefile -and -not -name '*.*' -and -not -name '%{name}-*'); do
