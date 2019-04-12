@@ -59,7 +59,7 @@ BuildRequires:	pkgconfig(xcb-xfixes)
 BuildRequires:	pkgconfig(xcursor)
 BuildRequires:	pkgconfig(xkbcommon) >= 0.3.0
 BuildRequires:	pkgconfig(libsystemd)
-BuildRequires:	pkgconfig(freerdp2)
+#BuildRequires:	pkgconfig(freerdp2)
 BuildRequires:	pkgconfig(libevdev)
 BuildRequires:	pkgconfig(gstreamer-1.0)
 BuildRequires:	pkgconfig(gstreamer-allocators-1.0)
@@ -102,6 +102,7 @@ Common headers for weston
 %build
 %meson \
     -Dtest-junit-xml=false \
+    -Dbackend-rdp=false \
 %ifnarch %{armx}
     -Dsimple-dmabuf-drm=intel
 %else
