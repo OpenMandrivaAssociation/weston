@@ -62,6 +62,7 @@ BuildRequires:	pkgconfig(libsystemd)
 BuildRequires:	pkgconfig(freerdp2)
 BuildRequires:	pkgconfig(libevdev)
 BuildRequires:	pkgconfig(gstreamer-1.0)
+BuildRequires:	pkgconfig(gstreamer-allocators-1.0)
 BuildRequires:	pam-devel
 BuildRequires:	jpeg-devel
 Requires:	xkeyboard-config
