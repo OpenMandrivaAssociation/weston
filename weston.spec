@@ -20,6 +20,7 @@ Url:		http://wayland.freedesktop.org/
 #Patch3:		0005-Enable-GAL2D-compositor-in-SoloLite.patch
 #Patch4:		0006-Change-GAL2D-compositor-to-be-default-i.patch
 Patch10:	weston-3.0.0-toolkits-use-wayland.patch
+Patch11:	fix-underlinking.diff
 BuildRequires:	meson
 BuildRequires:	pkgconfig(cairo) >= 1.10.0
 BuildRequires:	pkgconfig(wayland-egl)
