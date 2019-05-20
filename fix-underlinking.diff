@@ -1,0 +1,12 @@
+diff -up ./Makefile.in.tv ./Makefile.in
+--- ./Makefile.in.tv	2019-03-31 14:24:36.600676978 +0200
++++ ./Makefile.in	2019-03-31 14:24:37.997706630 +0200
+@@ -4578,7 +4578,7 @@ protocol/weston_editor-text-input-unstab
+ 
+ weston-editor$(EXEEXT): $(weston_editor_OBJECTS) $(weston_editor_DEPENDENCIES) $(EXTRA_weston_editor_DEPENDENCIES) 
+ 	@rm -f weston-editor$(EXEEXT)
+-	$(AM_V_CCLD)$(weston_editor_LINK) $(weston_editor_OBJECTS) $(weston_editor_LDADD) $(LIBS)
++	$(AM_V_CCLD)$(weston_editor_LINK) $(weston_editor_OBJECTS) $(weston_editor_LDADD) $(LIBS) -lgio-2.0 -lgobject-2.0 -lglib-2.0 
+ clients/weston_eventdemo-eventdemo.$(OBJEXT): clients/$(am__dirstamp) \
+ 	clients/$(DEPDIR)/$(am__dirstamp)
+ 
