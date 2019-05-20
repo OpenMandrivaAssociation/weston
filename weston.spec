@@ -1,7 +1,6 @@
-%define abi 5
+%define abi 6
 %define major 0
 
-%define _disable_lto 1
 %define _disable_ld_no_undefined 1
 
 Summary:	The Weston Wayland Compositor
