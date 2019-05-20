@@ -123,7 +123,6 @@ done
 mkdir -p %{buildroot}%{_sysconfdir}/xdg/weston
 install -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/xdg/weston/weston.ini
 
-
 install -d %{buildroot}%{_userpresetdir}
 cat > %{buildroot}%{_userpresetdir}/86-weston.preset << EOF
 enable weston.service
@@ -133,62 +132,70 @@ mkdir -p %{buildroot}%{_userunitdir}/
 install -m 644 %{SOURCE2} %{buildroot}%{_userunitdir}/weston.service
 
 %files
-%config(noreplace) %{_sysconfdir}/xdg/weston/weston.ini
-%{_userunitdir}/weston.service
-%{_userpresetdir}/86-weston.preset
+%dir %{_sysconfdir}/xdg/%{name}
+%config(noreplace) %{_sysconfdir}/xdg/%{name}/%{name}.ini
+%{_userunitdir}/%{name}.service
+%{_userpresetdir}/86-%{name}.preset
 %{_bindir}/%{name}
+%{_bindir}/%{name}-debug
 %{_bindir}/wcap-decode
 %attr(4755,root,root) %{_bindir}/%{name}-launch
 %{_bindir}/%{name}-info
 %{_bindir}/%{name}-terminal
 %{_bindir}/%{name}-touch-calibrator
+%{_bindir}/%{name}-screenshooter
+%{_bindir}/%{name}-simple-dmabuf-egl
 %{_libexecdir}/%{name}-*
 %dir %{_libdir}/%{name}
 %{_libdir}/%{name}/*.so
-%dir %{_libdir}/libweston-%{abi}
-%{_libdir}/libweston-%{abi}/drm-backend.so
-%{_libdir}/libweston-%{abi}/fbdev-backend.so
-%{_libdir}/libweston-%{abi}/gl-renderer.so
-%{_libdir}/libweston-%{abi}/headless-backend.so
-%{_libdir}/libweston-%{abi}/wayland-backend.so
-%{_libdir}/libweston-%{abi}/x11-backend.so
-%{_libdir}/libweston-%{abi}/xwayland.so
+%dir %{_libdir}/lib%{name}-%{abi}
+%{_libdir}/lib%{name}-%{abi}/drm-backend.so
+%{_libdir}/lib%{name}-%{abi}/fbdev-backend.so
+%{_libdir}/lib%{name}-%{abi}/gl-renderer.so
+%{_libdir}/lib%{name}-%{abi}/headless-backend.so
+%{_libdir}/lib%{name}-%{abi}/remoting-plugin.so
+%{_libdir}/lib%{name}-%{abi}/wayland-backend.so
+%{_libdir}/lib%{name}-%{abi}/x11-backend.so
+%{_libdir}/lib%{name}-%{abi}/xwayland.so
 %dir %{_datadir}/%{name}
-%{_datadir}/wayland-sessions/weston.desktop
+%{_datadir}/wayland-sessions/%{name}.desktop
 %{_datadir}/%{name}/*.png
 %{_datadir}/%{name}/*.svg
 %{_mandir}/man*/*
 
 %files demos
-%{_bindir}/weston-calibrator
-%{_bindir}/weston-clickdot
-%{_bindir}/weston-cliptest
-%{_bindir}/weston-confine
-%{_bindir}/weston-dnd
-%{_bindir}/weston-editor
-%{_bindir}/weston-eventdemo
-%{_bindir}/weston-flower
-%{_bindir}/weston-fullscreen
-%{_bindir}/weston-image
-%{_bindir}/weston-multi-resource
-%{_bindir}/weston-resizor
-%{_bindir}/weston-scaler
-%{_bindir}/weston-simple-dmabuf-drm
-%{_bindir}/weston-simple-dmabuf-v4l
-%{_bindir}/weston-simple-egl
-%{_bindir}/weston-simple-shm
-%{_bindir}/weston-simple-touch
-%{_bindir}/weston-smoke
-%{_bindir}/weston-stacking
-%{_bindir}/weston-subsurfaces
-%{_bindir}/weston-transformed
-%{_bindir}/weston-simple-damage
-%{_bindir}/weston-presentation-shm
+%{_bindir}/%{name}-calibrator
+%{_bindir}/%{name}-clickdot
+%{_bindir}/%{name}-cliptest
+%{_bindir}/%{name}-confine
+%{_bindir}/%{name}-dnd
+%{_bindir}/%{name}-editor
+%{_bindir}/%{name}-eventdemo
+%{_bindir}/%{name}-flower
+%{_bindir}/%{name}-fullscreen
+%{_bindir}/%{name}-image
+%{_bindir}/%{name}-multi-resource
+%{_bindir}/%{name}-resizor
+%{_bindir}/%{name}-scaler
+%{_bindir}/%{name}-simple-dmabuf-drm
+%{_bindir}/%{name}-simple-dmabuf-v4l
+%{_bindir}/%{name}-simple-egl
+%{_bindir}/%{name}-simple-shm
+%{_bindir}/%{name}-simple-touch
+%{_bindir}/%{name}-smoke
+%{_bindir}/%{name}-stacking
+%{_bindir}/%{name}-subsurfaces
+%{_bindir}/%{name}-transformed
+%{_bindir}/%{name}-simple-damage
+%{_bindir}/%{name}-presentation-shm
 
 %files devel
-%{_includedir}/weston
-%{_includedir}/libweston-%{abi}
-%{_libdir}/pkgconfig/weston.pc
-%{_libdir}/pkgconfig/libweston-%{abi}.pc
-%{_libdir}/pkgconfig/libweston-desktop-%{abi}.pc
+%{_includedir}/%{name}
+%{_includedir}/lib%{name}-%{abi}
+%dir %{_datadir}/%{name}/protocols
+%{_datadir}/%{name}/protocols/*
+%{_datadir}/pkgconfig/lib%{name}-%{abi}-protocols.pc
+%{_libdir}/pkgconfig/%{name}.pc
+%{_libdir}/pkgconfig/lib%{name}-%{abi}.pc
+%{_libdir}/pkgconfig/lib%{name}-desktop-%{abi}.pc
 %{_libdir}/lib*.so
