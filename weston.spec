@@ -192,8 +192,6 @@ install -m 644 %{SOURCE2} %{buildroot}%{_userunitdir}/weston.service
 %files devel
 %{_includedir}/%{name}
 %{_includedir}/lib%{name}-%{abi}
-%dir %{_datadir}/%{name}/protocols
-%{_datadir}/%{name}/protocols/*
 %{_datadir}/pkgconfig/lib%{name}-%{abi}-protocols.pc
 %{_libdir}/pkgconfig/%{name}.pc
 %{_libdir}/pkgconfig/lib%{name}-%{abi}.pc
