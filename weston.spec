@@ -1,11 +1,11 @@
-%define abi 6
+%define abi 8
 %define major 0
 
 %define _disable_ld_no_undefined 1
 
 Summary:	The Weston Wayland Compositor
 Name:		weston
-Version:	6.0.1
+Version:	8.0.0
 Release:	1
 Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
 Source1:	weston.ini
@@ -20,7 +20,6 @@ Url:		http://wayland.freedesktop.org/
 #Patch3:		0005-Enable-GAL2D-compositor-in-SoloLite.patch
 #Patch4:		0006-Change-GAL2D-compositor-to-be-default-i.patch
 Patch10:	weston-3.0.0-toolkits-use-wayland.patch
-Patch11:	fix-underlinking.diff
 BuildRequires:	meson
 BuildRequires:	pkgconfig(cairo) >= 1.10.0
 BuildRequires:	pkgconfig(wayland-egl)
@@ -29,7 +28,7 @@ BuildRequires:	pkgconfig(cairo-egl) >= 1.11.3
 BuildRequires:	pkgconfig(cairo-xcb)
 BuildRequires:	pkgconfig(colord) >= 0.1.27
 BuildRequires:	pkgconfig(dbus-1)
-BuildRequires:	pkgconfig(egl) >= 7.10
+BuildRequires:	pkgconfig(egl) >= 1.3
 BuildRequires:	pkgconfig(gbm)
 BuildRequires:	pkgconfig(gio-2.0)
 BuildRequires:	pkgconfig(glesv2)
@@ -138,6 +137,8 @@ install -m 644 %{SOURCE2} %{buildroot}%{_userunitdir}/weston.service
 %{_userpresetdir}/86-%{name}.preset
 %{_bindir}/%{name}
 %{_bindir}/%{name}-debug
+%{_bindir}/%{name}-content_protection
+%{_libdir}/weston/libexec_weston.so.0*
 %{_bindir}/wcap-decode
 %attr(4755,root,root) %{_bindir}/%{name}-launch
 %{_bindir}/%{name}-info
@@ -153,6 +154,7 @@ install -m 644 %{SOURCE2} %{buildroot}%{_userunitdir}/weston.service
 %{_libdir}/lib%{name}-%{abi}/fbdev-backend.so
 %{_libdir}/lib%{name}-%{abi}/gl-renderer.so
 %{_libdir}/lib%{name}-%{abi}/headless-backend.so
+%{_libdir}/lib%{name}-%{abi}/pipewire-plugin.so
 %{_libdir}/lib%{name}-%{abi}/remoting-plugin.so
 %{_libdir}/lib%{name}-%{abi}/wayland-backend.so
 %{_libdir}/lib%{name}-%{abi}/x11-backend.so
@@ -177,7 +179,6 @@ install -m 644 %{SOURCE2} %{buildroot}%{_userunitdir}/weston.service
 %{_bindir}/%{name}-multi-resource
 %{_bindir}/%{name}-resizor
 %{_bindir}/%{name}-scaler
-%{_bindir}/%{name}-simple-dmabuf-drm
 %{_bindir}/%{name}-simple-dmabuf-v4l
 %{_bindir}/%{name}-simple-egl
 %{_bindir}/%{name}-simple-shm
@@ -192,11 +193,9 @@ install -m 644 %{SOURCE2} %{buildroot}%{_userunitdir}/weston.service
 %files devel
 %{_includedir}/%{name}
 %{_includedir}/lib%{name}-%{abi}
-%dir %{_datadir}/lib%{name}
-%dir %{_datadir}/lib%{name}/protocols
-%{_datadir}/lib%{name}/protocols/*.xml
 %{_datadir}/pkgconfig/lib%{name}-%{abi}-protocols.pc
 %{_libdir}/pkgconfig/%{name}.pc
 %{_libdir}/pkgconfig/lib%{name}-%{abi}.pc
 %{_libdir}/pkgconfig/lib%{name}-desktop-%{abi}.pc
 %{_libdir}/lib*.so
+%{_datadir}/libweston-%{abi}
