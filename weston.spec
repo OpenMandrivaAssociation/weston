@@ -63,6 +63,7 @@ BuildRequires:	pkgconfig(libsystemd)
 BuildRequires:	pkgconfig(libevdev)
 BuildRequires:	pkgconfig(gstreamer-1.0)
 BuildRequires:	pkgconfig(gstreamer-allocators-1.0)
+BuildRequires:	pkgconfig(libpipewire-0.2)
 BuildRequires:	pam-devel
 BuildRequires:	jpeg-devel
 Requires:	xkeyboard-config
