@@ -1,6 +1,8 @@
 %define abi 8
 %define major 0
 
+%global pipewire 1
+
 %define _disable_ld_no_undefined 1
 
 Summary:	The Weston Wayland Compositor
@@ -63,7 +65,9 @@ BuildRequires:	pkgconfig(libsystemd)
 BuildRequires:	pkgconfig(libevdev)
 BuildRequires:	pkgconfig(gstreamer-1.0)
 BuildRequires:	pkgconfig(gstreamer-allocators-1.0)
+%if %{pipewire}
 BuildRequires:	pkgconfig(libpipewire-0.3)
+%endif
 BuildRequires:	pam-devel
 BuildRequires:	jpeg-devel
 Requires:	xkeyboard-config
@@ -103,12 +107,16 @@ Common headers for weston
 %build
 %meson \
     -Dtest-junit-xml=false \
+%if %{pipewire}
+    -Dpipewire=false
+%endif
     -Dbackend-rdp=false \
 %ifnarch %{armx}
     -Dsimple-dmabuf-drm=intel
 %else
     -Dsimple-dmabuf-drm="freedreno,etnaviv"
 %endif
+   
 
 %meson_build
 
@@ -155,7 +163,9 @@ install -m 644 %{SOURCE2} %{buildroot}%{_userunitdir}/weston.service
 %{_libdir}/lib%{name}-%{abi}/fbdev-backend.so
 %{_libdir}/lib%{name}-%{abi}/gl-renderer.so
 %{_libdir}/lib%{name}-%{abi}/headless-backend.so
+%if %{pipewire}
 %{_libdir}/lib%{name}-%{abi}/pipewire-plugin.so
+%endif
 %{_libdir}/lib%{name}-%{abi}/remoting-plugin.so
 %{_libdir}/lib%{name}-%{abi}/wayland-backend.so
 %{_libdir}/lib%{name}-%{abi}/x11-backend.so
