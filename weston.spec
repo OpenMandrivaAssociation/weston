@@ -108,7 +108,7 @@ Common headers for weston
 %meson \
     -Dtest-junit-xml=false \
 %if %{pipewire}
-    -Dpipewire=false
+    -Dpipewire=false \
 %endif
 %ifnarch %{armx}
     -Dsimple-dmabuf-drm=intel
