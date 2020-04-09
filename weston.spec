@@ -6,7 +6,7 @@
 Summary:	The Weston Wayland Compositor
 Name:		weston
 Version:	8.0.0
-Release:	1
+Release:	2
 Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
 Source1:	weston.ini
 Source2:	weston.service
@@ -63,7 +63,7 @@ BuildRequires:	pkgconfig(libsystemd)
 BuildRequires:	pkgconfig(libevdev)
 BuildRequires:	pkgconfig(gstreamer-1.0)
 BuildRequires:	pkgconfig(gstreamer-allocators-1.0)
-BuildRequires:	pkgconfig(libpipewire-0.2)
+BuildRequires:	pkgconfig(libpipewire-0.3)
 BuildRequires:	pam-devel
 BuildRequires:	jpeg-devel
 Requires:	xkeyboard-config
