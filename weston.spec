@@ -110,7 +110,6 @@ Common headers for weston
 %if %{pipewire}
     -Dpipewire=false
 %endif
-    -Dbackend-rdp=false \
 %ifnarch %{armx}
     -Dsimple-dmabuf-drm=intel
 %else
