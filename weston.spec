@@ -163,6 +163,8 @@ install -m 644 %{SOURCE2} %{buildroot}%{_userunitdir}/weston.service
 %{_libdir}/lib%{name}-%{abi}/gl-renderer.so
 %{_libdir}/lib%{name}-%{abi}/headless-backend.so
 %if %{pipewire}
+#{_libdir}/lib%{name}-%{abi}/pipewire-plugin.so
+%else
 %{_libdir}/lib%{name}-%{abi}/pipewire-plugin.so
 %endif
 %{_libdir}/lib%{name}-%{abi}/remoting-plugin.so
