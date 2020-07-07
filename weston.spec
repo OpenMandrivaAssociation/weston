@@ -9,7 +9,7 @@
 Summary:	The Weston Wayland Compositor
 Name:		weston
 Version:	8.0.0
-Release:	2
+Release:	3
 Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
 Source1:	weston.ini
 Source2:	weston.service
