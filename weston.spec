@@ -1,7 +1,8 @@
 %define abi 9
 %define major 0
 
-%global pipewire 0
+# As of 8.0.0 and 9.0.0, pipewire 0.3 is not supported. Only 0.2 but we ship new one, so this feature need to be disable for now.
+%global pipewire 1
 
 %define _disable_ld_no_undefined 1
 
