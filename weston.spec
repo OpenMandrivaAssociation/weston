@@ -1,8 +1,7 @@
-%define abi 8
+%define abi 9
 %define major 0
 
-# 8.0.0 support only pipewire 0.2 and in Cooker we have 0.3... Until patch arrive or new vercion come build without pipewire
-%global pipewire 1
+%global pipewire 0
 
 %define _disable_ld_no_undefined 1
 
