@@ -1,15 +1,15 @@
-%define abi 8
+%define abi 9
 %define major 0
 
-# 8.0.0 support only pipewire 0.2 and in Cooker we have 0.3... Until patch arrive or new vercion come build without pipewire
+# As of 8.0.0 and 9.0.0, pipewire 0.3 is not supported. Only 0.2 but we ship new one, so this feature need to be disable for now.
 %global pipewire 1
 
 %define _disable_ld_no_undefined 1
 
 Summary:	The Weston Wayland Compositor
 Name:		weston
-Version:	8.0.0
-Release:	3
+Version:	9.0.0
+Release:	1
 Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
 Source1:	weston.ini
 Source2:	weston.service
@@ -168,7 +168,7 @@ install -m 644 %{SOURCE2} %{buildroot}%{_userunitdir}/weston.service
 %else
 %{_libdir}/lib%{name}-%{abi}/pipewire-plugin.so
 %endif
-%{_libdir}/libweston-8/rdp-backend.so
+%{_libdir}/libweston-%{abi}/rdp-backend.so
 %{_libdir}/lib%{name}-%{abi}/remoting-plugin.so
 %{_libdir}/lib%{name}-%{abi}/wayland-backend.so
 %{_libdir}/lib%{name}-%{abi}/x11-backend.so
