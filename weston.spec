@@ -168,7 +168,7 @@ install -m 644 %{SOURCE2} %{buildroot}%{_userunitdir}/weston.service
 %else
 %{_libdir}/lib%{name}-%{abi}/pipewire-plugin.so
 %endif
-%{_libdir}/libweston-8/rdp-backend.so
+#{_libdir}/libweston-8/rdp-backend.so
 %{_libdir}/lib%{name}-%{abi}/remoting-plugin.so
 %{_libdir}/lib%{name}-%{abi}/wayland-backend.so
 %{_libdir}/lib%{name}-%{abi}/x11-backend.so
