@@ -2,17 +2,16 @@
 %define major 0
 
 # As of 8.0.0 and 9.0.0, pipewire 0.3 is not supported. Only 0.2 but we ship new one, so this feature need to be disable for now.
-%global pipewire 1
+%global bcond_with pipewire
 
 %define _disable_ld_no_undefined 1
 
 Summary:	The Weston Wayland Compositor
 Name:		weston
 Version:	9.0.0
-Release:	1
+Release:	2
 Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
 Source1:	weston.ini
-Source2:	weston.service
 License:	MIT
 Group:		Graphics
 Url:		http://wayland.freedesktop.org/
@@ -27,7 +26,6 @@ BuildRequires:	meson
 BuildRequires:	pkgconfig(cairo) >= 1.10.0
 BuildRequires:	pkgconfig(wayland-egl)
 BuildRequires:	pkgconfig(wayland-protocols)
-BuildRequires:	pkgconfig(cairo-egl) >= 1.11.3
 BuildRequires:	pkgconfig(cairo-xcb)
 BuildRequires:	pkgconfig(colord) >= 0.1.27
 BuildRequires:	pkgconfig(dbus-1)
@@ -66,12 +64,14 @@ BuildRequires:	pkgconfig(freerdp2)
 BuildRequires:	pkgconfig(libevdev)
 BuildRequires:	pkgconfig(gstreamer-1.0)
 BuildRequires:	pkgconfig(gstreamer-allocators-1.0)
-%if %{pipewire}
+%if %{with pipewire}
 BuildRequires:	pkgconfig(libpipewire-0.3)
 %endif
 BuildRequires:	pam-devel
-BuildRequires:	jpeg-devel
+BuildRequires:	pkgconfig(libjpeg)
 Requires:	xkeyboard-config
+Requires:	dri-drivers
+Recommends:	falkon-core
 
 %libpackage weston-%{abi} %{major}
 %libpackage weston-desktop-%{abi} %{major}
@@ -89,6 +89,7 @@ Wayland desktop and act as a X window manager.
 %package demos
 Summary:	Demo clients for Weston
 Group:		Graphics
+Requires:	%{name}
 
 %description demos
 This package contains a few example clients for Weston, from simple
@@ -96,11 +97,12 @@ clients that demonstrate certain aspects of the protocol to more
 complete clients and a simplistic toolkit demo clients for Weston.
 
 %package devel
-Summary: Common headers for weston
-License: MIT
+Summary:	Common headers for weston
+License:	MIT
+Group:		Development/Others
 
 %description devel
-Common headers for weston
+Common headers for weston.
 
 %prep
 %autosetup -p1
@@ -108,15 +110,11 @@ Common headers for weston
 %build
 %meson \
     -Dtest-junit-xml=false \
-%if %{pipewire}
-    -Dpipewire=false \
-%endif
-%ifnarch %{armx}
-    -Dsimple-dmabuf-drm=intel
+%if %{with pipewire}
+    -Dpipewire=true \
 %else
-    -Dsimple-dmabuf-drm="freedreno,etnaviv"
+    -Dpipewire=false
 %endif
-   
 
 %meson_build
 
@@ -124,30 +122,16 @@ Common headers for weston
 %meson_install
 rm -f %{buildroot}%{_libdir}/%{name}/*.la
 
-for d in $(find clients/ -type f -not -name Makefile -and -not -name '*.*' -and -not -name '%{name}-*'); do
-    install -m755 $d %{buildroot}%{_bindir}/%{name}-$(basename $d)
-done
-
 mkdir -p %{buildroot}%{_sysconfdir}/xdg/weston
 install -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/xdg/weston/weston.ini
-
-install -d %{buildroot}%{_userpresetdir}
-cat > %{buildroot}%{_userpresetdir}/86-weston.preset << EOF
-enable weston.service
-EOF
-
-mkdir -p %{buildroot}%{_userunitdir}/
-install -m 644 %{SOURCE2} %{buildroot}%{_userunitdir}/weston.service
 
 %files
 %dir %{_sysconfdir}/xdg/%{name}
 %config(noreplace) %{_sysconfdir}/xdg/%{name}/%{name}.ini
-%{_userunitdir}/%{name}.service
-%{_userpresetdir}/86-%{name}.preset
 %{_bindir}/%{name}
 %{_bindir}/%{name}-debug
 %{_bindir}/%{name}-content_protection
-%{_libdir}/weston/libexec_weston.so.0*
+
 %{_bindir}/wcap-decode
 %attr(4755,root,root) %{_bindir}/%{name}-launch
 %{_bindir}/%{name}-info
@@ -157,18 +141,17 @@ install -m 644 %{SOURCE2} %{buildroot}%{_userunitdir}/weston.service
 %{_bindir}/%{name}-simple-dmabuf-egl
 %{_libexecdir}/%{name}-*
 %dir %{_libdir}/%{name}
+%{_libdir}/%{name}/libexec_weston.so.0*
 %{_libdir}/%{name}/*.so
 %dir %{_libdir}/lib%{name}-%{abi}
 %{_libdir}/lib%{name}-%{abi}/drm-backend.so
 %{_libdir}/lib%{name}-%{abi}/fbdev-backend.so
 %{_libdir}/lib%{name}-%{abi}/gl-renderer.so
 %{_libdir}/lib%{name}-%{abi}/headless-backend.so
-%if %{pipewire}
-#{_libdir}/lib%{name}-%{abi}/pipewire-plugin.so
-%else
+%if %{with pipewire}
 %{_libdir}/lib%{name}-%{abi}/pipewire-plugin.so
 %endif
-%{_libdir}/libweston-%{abi}/rdp-backend.so
+%{_libdir}/lib%{name}-%{abi}/rdp-backend.so
 %{_libdir}/lib%{name}-%{abi}/remoting-plugin.so
 %{_libdir}/lib%{name}-%{abi}/wayland-backend.so
 %{_libdir}/lib%{name}-%{abi}/x11-backend.so
@@ -180,29 +163,32 @@ install -m 644 %{SOURCE2} %{buildroot}%{_userunitdir}/weston.service
 %{_mandir}/man*/*
 
 %files demos
-%{_bindir}/%{name}-calibrator
-%{_bindir}/%{name}-clickdot
-%{_bindir}/%{name}-cliptest
-%{_bindir}/%{name}-confine
-%{_bindir}/%{name}-dnd
-%{_bindir}/%{name}-editor
-%{_bindir}/%{name}-eventdemo
-%{_bindir}/%{name}-flower
-%{_bindir}/%{name}-fullscreen
-%{_bindir}/%{name}-image
-%{_bindir}/%{name}-multi-resource
-%{_bindir}/%{name}-resizor
-%{_bindir}/%{name}-scaler
-%{_bindir}/%{name}-simple-dmabuf-v4l
-%{_bindir}/%{name}-simple-egl
-%{_bindir}/%{name}-simple-shm
-%{_bindir}/%{name}-simple-touch
-%{_bindir}/%{name}-smoke
-%{_bindir}/%{name}-stacking
-%{_bindir}/%{name}-subsurfaces
-%{_bindir}/%{name}-transformed
-%{_bindir}/%{name}-simple-damage
-%{_bindir}/%{name}-presentation-shm
+%{_bindir}/weston-calibrator
+%{_bindir}/weston-clickdot
+%{_bindir}/weston-cliptest
+%{_bindir}/weston-confine
+%{_bindir}/weston-dnd
+%{_bindir}/weston-editor
+%{_bindir}/weston-eventdemo
+%{_bindir}/weston-flower
+%{_bindir}/weston-fullscreen
+%{_bindir}/weston-image
+%{_bindir}/weston-multi-resource
+%{_bindir}/weston-presentation-shm
+%{_bindir}/weston-resizor
+%{_bindir}/weston-scaler
+%{_bindir}/weston-simple-damage
+%{_bindir}/weston-content_protection
+%{_bindir}/weston-simple-dmabuf-egl
+%{_bindir}/weston-simple-dmabuf-v4l
+%{_bindir}/weston-simple-egl
+%{_bindir}/weston-simple-shm
+%{_bindir}/weston-simple-touch
+%{_bindir}/weston-smoke
+%{_bindir}/weston-stacking
+%{_bindir}/weston-subsurfaces
+%{_bindir}/weston-touch-calibrator
+%{_bindir}/weston-transformed
 
 %files devel
 %{_includedir}/%{name}
@@ -212,4 +198,4 @@ install -m 644 %{SOURCE2} %{buildroot}%{_userunitdir}/weston.service
 %{_libdir}/pkgconfig/lib%{name}-%{abi}.pc
 %{_libdir}/pkgconfig/lib%{name}-desktop-%{abi}.pc
 %{_libdir}/lib*.so
-%{_datadir}/libweston-%{abi}
+%{_datadir}/libweston-%{abi}/protocols/
