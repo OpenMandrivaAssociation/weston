@@ -6,10 +6,12 @@
 
 %define _disable_ld_no_undefined 1
 
+%global build_ldflags %{build_ldflags} -Wl,-z,undefs
+
 Summary:	The Weston Wayland Compositor
 Name:		weston
 Version:	9.0.0
-Release:	2
+Release:	3
 Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
 Source1:	weston.ini
 License:	MIT
@@ -131,7 +133,6 @@ install -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/xdg/weston/weston.ini
 %{_bindir}/%{name}
 %{_bindir}/%{name}-debug
 %{_bindir}/%{name}-content_protection
-
 %{_bindir}/wcap-decode
 %attr(4755,root,root) %{_bindir}/%{name}-launch
 %{_bindir}/%{name}-info
