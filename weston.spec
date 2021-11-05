@@ -11,7 +11,7 @@
 Summary:	The Weston Wayland Compositor
 Name:		weston
 Version:	9.0.0
-Release:	3
+Release:	4
 Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
 Source1:	weston.ini
 License:	MIT
@@ -161,7 +161,7 @@ install -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/xdg/weston/weston.ini
 %{_datadir}/wayland-sessions/%{name}.desktop
 %{_datadir}/%{name}/*.png
 %{_datadir}/%{name}/*.svg
-%{_mandir}/man*/*
+%doc %{_mandir}/man*/*
 
 %files demos
 %{_bindir}/weston-calibrator
