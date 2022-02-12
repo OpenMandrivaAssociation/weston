@@ -1,8 +1,8 @@
-%define abi 9
+%define abi 10
 %define major 0
 
 # As of 8.0.0 and 9.0.0, pipewire 0.3 is not supported. Only 0.2 but we ship new one, so this feature need to be disable for now.
-%global bcond_with pipewire
+%global bcond_without pipewire
 
 %define _disable_ld_no_undefined 1
 
@@ -10,8 +10,8 @@
 
 Summary:	The Weston Wayland Compositor
 Name:		weston
-Version:	9.0.0
-Release:	5
+Version:	10.0.0
+Release:	1
 Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
 Source1:	weston.ini
 License:	MIT
@@ -133,8 +133,8 @@ install -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/xdg/weston/weston.ini
 %{_bindir}/%{name}
 %{_bindir}/%{name}-debug
 %{_bindir}/%{name}-content_protection
+%{_bindir}/weston-simple-dmabuf-feedback
 %{_bindir}/wcap-decode
-%attr(4755,root,root) %{_bindir}/%{name}-launch
 %{_bindir}/%{name}-info
 %{_bindir}/%{name}-terminal
 %{_bindir}/%{name}-touch-calibrator
@@ -146,12 +146,12 @@ install -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/xdg/weston/weston.ini
 %{_libdir}/%{name}/*.so
 %dir %{_libdir}/lib%{name}-%{abi}
 %{_libdir}/lib%{name}-%{abi}/drm-backend.so
-%{_libdir}/lib%{name}-%{abi}/fbdev-backend.so
 %{_libdir}/lib%{name}-%{abi}/gl-renderer.so
 %{_libdir}/lib%{name}-%{abi}/headless-backend.so
 %if %{with pipewire}
 %{_libdir}/lib%{name}-%{abi}/pipewire-plugin.so
 %endif
+%{_libdir}/lib%{name}-%{abi}/color-lcms.so
 %{_libdir}/lib%{name}-%{abi}/rdp-backend.so
 %{_libdir}/lib%{name}-%{abi}/remoting-plugin.so
 %{_libdir}/lib%{name}-%{abi}/wayland-backend.so
