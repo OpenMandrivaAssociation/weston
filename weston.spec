@@ -2,7 +2,7 @@
 %define major 0
 
 # As of 8.0.0 and 9.0.0, pipewire 0.3 is not supported. Only 0.2 but we ship new one, so this feature need to be disable for now.
-%global bcond_without pipewire
+%bcond_without pipewire
 
 %define _disable_ld_no_undefined 1
 
@@ -11,19 +11,14 @@
 Summary:	The Weston Wayland Compositor
 Name:		weston
 Version:	10.0.0
-Release:	1
+Release:	2
 Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
 Source1:	weston.ini
 License:	MIT
 Group:		Graphics
 Url:		http://wayland.freedesktop.org/
 # not move me
-#Patch0:		0001-ENGR00314805-1-Add-Vivante-EGL-support.patch
-#Patch1:		0002-ENGR00314805-2-Add-Vivante-GAL2D-support.patch
-#Patch2:		0003-Distorted-line-and-shadow-if-use-2d-com.patch
-#Patch3:		0005-Enable-GAL2D-compositor-in-SoloLite.patch
-#Patch4:		0006-Change-GAL2D-compositor-to-be-default-i.patch
-Patch10:	weston-3.0.0-toolkits-use-wayland.patch
+Patch0:	weston-3.0.0-toolkits-use-wayland.patch
 BuildRequires:	meson
 BuildRequires:	pkgconfig(cairo) >= 1.10.0
 BuildRequires:	pkgconfig(wayland-egl)
