@@ -11,14 +11,14 @@
 Summary:	The Weston Wayland Compositor
 Name:		weston
 Version:	10.0.0
-Release:	2
-Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
-Source1:	weston.ini
+Release:	3
 License:	MIT
 Group:		Graphics
 Url:		http://wayland.freedesktop.org/
+Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
+Source1:	weston.ini
 # not move me
-Patch0:	weston-3.0.0-toolkits-use-wayland.patch
+Patch0:		weston-3.0.0-toolkits-use-wayland.patch
 BuildRequires:	meson
 BuildRequires:	pkgconfig(cairo) >= 1.10.0
 BuildRequires:	pkgconfig(wayland-egl)
