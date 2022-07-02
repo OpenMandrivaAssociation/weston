@@ -10,12 +10,12 @@
 
 Summary:	The Weston Wayland Compositor
 Name:		weston
-Version:	10.0.0
-Release:	3
+Version:	10.0.1
+Release:	1
 License:	MIT
 Group:		Graphics
 Url:		http://wayland.freedesktop.org/
-Source0:	http://wayland.freedesktop.org/releases/%{name}-%{version}.tar.xz
+Source0:	https://gitlab.freedesktop.org/wayland/weston/-/releases/%{version}/downloads/%{name}-%{version}.tar.xz
 Source1:	weston.ini
 # not move me
 Patch0:		weston-3.0.0-toolkits-use-wayland.patch
