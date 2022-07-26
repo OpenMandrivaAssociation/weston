@@ -1,7 +1,6 @@
 %define abi 10
 %define major 0
 
-# As of 8.0.0 and 9.0.0, pipewire 0.3 is not supported. Only 0.2 but we ship new one, so this feature need to be disable for now.
 %bcond_without pipewire
 
 %define _disable_ld_no_undefined 1
@@ -10,7 +9,7 @@
 
 Summary:	The Weston Wayland Compositor
 Name:		weston
-Version:	10.0.1
+Version:	10.0.2
 Release:	1
 License:	MIT
 Group:		Graphics
@@ -187,8 +186,10 @@ install -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/xdg/weston/weston.ini
 %{_bindir}/weston-transformed
 
 %files devel
-%{_includedir}/%{name}
-%{_includedir}/lib%{name}-%{abi}
+%dir %{_includedir}/%{name}
+%{_includedir}/%{name}/*
+%dir %{_includedir}/lib%{name}-%{abi}
+%{_includedir}/lib%{name}-%{abi}/*
 %{_datadir}/pkgconfig/lib%{name}-%{abi}-protocols.pc
 %{_libdir}/pkgconfig/%{name}.pc
 %{_libdir}/pkgconfig/lib%{name}-%{abi}.pc
