@@ -65,6 +65,7 @@ BuildRequires:	pkgconfig(libpipewire-0.3)
 %endif
 BuildRequires:	pam-devel
 BuildRequires:	pkgconfig(libjpeg)
+BuildRequires:	pkgconfig(libseat)
 Requires:	xkeyboard-config
 Requires:	dri-drivers
 Recommends:	falkon-core
