@@ -1,4 +1,4 @@
-%define abi 10
+%define abi 11
 %define major 0
 
 %bcond_without pipewire
@@ -9,7 +9,7 @@
 
 Summary:	The Weston Wayland Compositor
 Name:		weston
-Version:	10.0.2
+Version:	11.0.0
 Release:	1
 License:	MIT
 Group:		Graphics
@@ -68,9 +68,9 @@ BuildRequires:	pkgconfig(libjpeg)
 Requires:	xkeyboard-config
 Requires:	dri-drivers
 Recommends:	falkon-core
+Obsoletes: %{mklibname weston-desktop-10 %{major}}
 
 %libpackage weston-%{abi} %{major}
-%libpackage weston-desktop-%{abi} %{major}
 
 %description
 Weston is the reference implementation of a Wayland compositor, and a
@@ -129,7 +129,6 @@ install -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/xdg/weston/weston.ini
 %{_bindir}/%{name}-content_protection
 %{_bindir}/weston-simple-dmabuf-feedback
 %{_bindir}/wcap-decode
-%{_bindir}/%{name}-info
 %{_bindir}/%{name}-terminal
 %{_bindir}/%{name}-touch-calibrator
 %{_bindir}/%{name}-screenshooter
