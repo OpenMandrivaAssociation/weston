@@ -9,7 +9,7 @@
 
 Summary:	The Weston Wayland Compositor
 Name:		weston
-Version:	11.0.0
+Version:	11.0.1
 Release:	1
 License:	MIT
 Group:		Graphics
@@ -69,7 +69,7 @@ BuildRequires:	pkgconfig(libseat)
 Requires:	xkeyboard-config
 Requires:	dri-drivers
 Recommends:	falkon-core
-Obsoletes: %{mklibname weston-desktop-10 %{major}}
+Obsoletes:	%{mklibname weston-desktop-10 %{major}}
 
 %libpackage weston-%{abi} %{major}
 
