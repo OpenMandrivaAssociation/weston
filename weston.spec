@@ -9,8 +9,8 @@
 
 Summary:	The Weston Wayland Compositor
 Name:		weston
-Version:	11.0.1
-Release:	2
+Version:	12.0.0
+Release:	1
 License:	MIT
 Group:		Graphics
 Url:		http://wayland.freedesktop.org/
