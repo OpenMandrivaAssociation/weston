@@ -1,4 +1,4 @@
-%define abi 11
+%define abi 12
 %define major 0
 
 %bcond_without pipewire
@@ -9,7 +9,7 @@
 
 Summary:	The Weston Wayland Compositor
 Name:		weston
-Version:	12.0.0
+Version:	12.0.1
 Release:	1
 License:	MIT
 Group:		Graphics
@@ -50,6 +50,7 @@ BuildRequires:	pkgconfig(wayland-server) >= 1.14.0
 BuildRequires:	pkgconfig(x11)
 BuildRequires:	pkgconfig(x11-xcb)
 BuildRequires:	pkgconfig(xcb)
+BuildRequires:	pkgconfig(xcb-cursor)
 BuildRequires:	pkgconfig(xcb-dri2)
 BuildRequires:	pkgconfig(xcb-shm)
 BuildRequires:	pkgconfig(xcb-xfixes)
@@ -66,6 +67,7 @@ BuildRequires:	pkgconfig(libpipewire-0.3)
 BuildRequires:	pam-devel
 BuildRequires:	pkgconfig(libjpeg)
 BuildRequires:	pkgconfig(libseat)
+BuildRequires:	pkgconfig(libdisplay-info)
 Requires:	xkeyboard-config
 Requires:	dri-drivers
 Recommends:	falkon-core
@@ -106,11 +108,14 @@ Common headers for weston.
 
 %build
 %meson \
+    -Dbackend-vnc=false \
     -Dtest-junit-xml=false \
 %if %{with pipewire}
     -Dpipewire=true \
+    -Dbackend-pipewire=true
 %else
-    -Dpipewire=false
+    -Dpipewire=false \
+    -Dbackend-pipewire=false
 %endif
 
 %meson_build
@@ -125,11 +130,13 @@ install -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/xdg/weston/weston.ini
 %files
 %dir %{_sysconfdir}/xdg/%{name}
 %config(noreplace) %{_sysconfdir}/xdg/%{name}/%{name}.ini
+# %config %{_sysconfdir}/pam.d/weston-remote-access
 %{_bindir}/%{name}
 %{_bindir}/%{name}-debug
 %{_bindir}/%{name}-content_protection
 %{_bindir}/weston-simple-dmabuf-feedback
 %{_bindir}/wcap-decode
+%{_bindir}/%{name}-tablet
 %{_bindir}/%{name}-terminal
 %{_bindir}/%{name}-touch-calibrator
 %{_bindir}/%{name}-screenshooter
@@ -144,6 +151,7 @@ install -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/xdg/weston/weston.ini
 %{_libdir}/lib%{name}-%{abi}/headless-backend.so
 %if %{with pipewire}
 %{_libdir}/lib%{name}-%{abi}/pipewire-plugin.so
+%{_libdir}/libweston-%{abi}/pipewire-backend.so
 %endif
 %{_libdir}/lib%{name}-%{abi}/color-lcms.so
 %{_libdir}/lib%{name}-%{abi}/rdp-backend.so
@@ -190,9 +198,7 @@ install -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/xdg/weston/weston.ini
 %{_includedir}/%{name}/*
 %dir %{_includedir}/lib%{name}-%{abi}
 %{_includedir}/lib%{name}-%{abi}/*
-%{_datadir}/pkgconfig/lib%{name}-%{abi}-protocols.pc
-%{_libdir}/pkgconfig/%{name}.pc
-%{_libdir}/pkgconfig/lib%{name}-%{abi}.pc
-%{_libdir}/pkgconfig/lib%{name}-desktop-%{abi}.pc
+%{_datadir}/pkgconfig/*.pc
+%{_libdir}/pkgconfig/*.pc
 %{_libdir}/lib*.so
 %{_datadir}/libweston-%{abi}/protocols/
