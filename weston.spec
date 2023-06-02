@@ -1,16 +1,16 @@
+%global optflags %{optflags} -O3
+%global build_ldflags %{build_ldflags} -Wl,-z,undefs
+%define _disable_ld_no_undefined 1
+
 %define abi 12
 %define major 0
 
 %bcond_without pipewire
 
-%define _disable_ld_no_undefined 1
-
-%global build_ldflags %{build_ldflags} -Wl,-z,undefs
-
 Summary:	The Weston Wayland Compositor
 Name:		weston
 Version:	12.0.1
-Release:	3
+Release:	4
 License:	MIT
 Group:		Graphics
 Url:		http://wayland.freedesktop.org/
