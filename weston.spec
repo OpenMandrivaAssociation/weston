@@ -10,7 +10,7 @@
 Summary:	The Weston Wayland Compositor
 Name:		weston
 Version:	12.0.1
-Release:	4
+Release:	5
 License:	MIT
 Group:		Graphics
 Url:		http://wayland.freedesktop.org/
@@ -70,6 +70,7 @@ BuildRequires:	pkgconfig(libseat)
 BuildRequires:	pkgconfig(libdisplay-info)
 Requires:	xkeyboard-config
 Requires:	dri-drivers
+Requires:	seatd
 Recommends:	falkon-core
 Obsoletes:	%{mklibname weston-desktop-10 0}
 Obsoletes:	%{mklibname weston-10}
