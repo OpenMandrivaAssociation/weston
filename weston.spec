@@ -10,12 +10,14 @@
 Summary:	The Weston Wayland Compositor
 Name:		weston
 Version:	12.0.1
-Release:	5
+Release:	6
 License:	MIT
 Group:		Graphics
 Url:		http://wayland.freedesktop.org/
 Source0:	https://gitlab.freedesktop.org/wayland/weston/-/releases/%{version}/downloads/%{name}-%{version}.tar.xz
 Source1:	weston.ini
+Source2:	weston.socket
+Source3:	weston.service
 # not move me
 Patch0:		weston-3.0.0-toolkits-use-wayland.patch
 BuildRequires:	meson
@@ -132,10 +134,21 @@ rm -f %{buildroot}%{_libdir}/%{name}/*.la
 mkdir -p %{buildroot}%{_sysconfdir}/xdg/weston
 install -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/xdg/weston/weston.ini
 
+mkdir -p %{buildroot}%{_userunitdir}
+install -m644 %{SOURCE2} %{buildroot}%{_userunitdir}/%{name}.socket
+install -m644 %{SOURCE3} %{buildroot}%{_userunitdir}/%{name}.service
+
+%post
+%systemd_user_post %{name}.service
+
+%postun
+%systemd_user_postun %{name}.service
+
 %files
 %dir %{_sysconfdir}/xdg/%{name}
 %config(noreplace) %{_sysconfdir}/xdg/%{name}/%{name}.ini
 # %config %{_sysconfdir}/pam.d/weston-remote-access
+%{_userunitdir}/%{name}.s*
 %{_bindir}/%{name}
 %{_bindir}/%{name}-debug
 %{_bindir}/%{name}-content_protection
