@@ -146,7 +146,7 @@ install -m644 %{SOURCE3} %{buildroot}%{_userunitdir}/%{name}.service
 %files
 %dir %{_sysconfdir}/xdg/%{name}
 %config(noreplace) %{_sysconfdir}/xdg/%{name}/%{name}.ini
-# %config %{_sysconfdir}/pam.d/weston-remote-access
+%config %{_sysconfdir}/pam.d/weston-remote-access
 %{_userunitdir}/%{name}.s*
 %{_bindir}/%{name}
 %{_bindir}/%{name}-debug
@@ -166,6 +166,7 @@ install -m644 %{SOURCE3} %{buildroot}%{_userunitdir}/%{name}.service
 %{_libdir}/lib%{name}-%{abi}/drm-backend.so
 %{_libdir}/lib%{name}-%{abi}/gl-renderer.so
 %{_libdir}/lib%{name}-%{abi}/headless-backend.so
+%{_libdir}/lib%{name}-%{abi}/vnc-backend.so
 %if %{with pipewire}
 %{_libdir}/lib%{name}-%{abi}/pipewire-plugin.so
 %{_libdir}/libweston-%{abi}/pipewire-backend.so
