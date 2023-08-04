@@ -1,6 +1,5 @@
 %global optflags %{optflags} -O3
 %global build_ldflags %{build_ldflags} -Wl,-z,undefs
-%define _disable_ld_no_undefined 1
 
 %define abi 12
 %define major 0
@@ -9,8 +8,8 @@
 
 Summary:	The Weston Wayland Compositor
 Name:		weston
-Version:	12.0.1
-Release:	6
+Version:	12.0.2
+Release:	1
 License:	MIT
 Group:		Graphics
 Url:		http://wayland.freedesktop.org/
@@ -63,6 +62,7 @@ BuildRequires:	pkgconfig(freerdp2)
 BuildRequires:	pkgconfig(libevdev)
 BuildRequires:	pkgconfig(gstreamer-1.0)
 BuildRequires:	pkgconfig(gstreamer-allocators-1.0)
+BuildRequires:	pkgconfig(neatvnc)
 %if %{with pipewire}
 BuildRequires:	pkgconfig(libpipewire-0.3)
 %endif
@@ -115,7 +115,6 @@ Common headers for weston.
 
 %build
 %meson \
-    -Dbackend-vnc=false \
     -Dtest-junit-xml=false \
 %if %{with pipewire}
     -Dpipewire=true \
