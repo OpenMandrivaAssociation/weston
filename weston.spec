@@ -1,14 +1,14 @@
-%global optflags %{optflags} -O3
-%global build_ldflags %{build_ldflags} -Wl,-z,undefs
+%global optflags %{optflags} -Wno-error=implicit-function-declaration -Wno-error=int-conversion
+%global build_ldflags %{build_ldflags} -Wl,-z,undefs -Wl,--allow-shlib-undefined
 
-%define abi 12
+%define abi 13
 %define major 0
 
 %bcond_without pipewire
 
 Summary:	The Weston Wayland Compositor
 Name:		weston
-Version:	12.0.2
+Version:	13.0.0
 Release:	1
 License:	MIT
 Group:		Graphics
@@ -74,11 +74,11 @@ Requires:	xkeyboard-config
 Requires:	dri-drivers
 Requires:	seatd
 Recommends:	falkon-core
-Obsoletes:	%{mklibname weston-desktop-10 0}
-Obsoletes:	%{mklibname weston-10}
-Obsoletes:	%{mklibname weston-10 0}
-Obsoletes:	%{mklibname weston-11}
-Obsoletes:	%{mklibname weston-11 0}
+Obsoletes:	%{mklibname weston-desktop-10 0} < 13.0.0
+Obsoletes:	%{mklibname weston-10} < 13.0.0
+Obsoletes:	%{mklibname weston-10 0} < 13.0.0
+Obsoletes:	%{mklibname weston-11} < 13.0.0
+Obsoletes:	%{mklibname weston-11 0} < 13.0.0
 
 %libpackage weston-%{abi} %{major}
 
@@ -187,7 +187,7 @@ install -m644 %{SOURCE3} %{buildroot}%{_userunitdir}/%{name}.service
 %{_bindir}/weston-calibrator
 %{_bindir}/weston-clickdot
 %{_bindir}/weston-cliptest
-%{_bindir}/weston-confine
+%{_bindir}/weston-constraints
 %{_bindir}/weston-dnd
 %{_bindir}/weston-editor
 %{_bindir}/weston-eventdemo
