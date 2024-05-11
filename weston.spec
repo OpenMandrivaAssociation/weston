@@ -9,7 +9,7 @@
 Summary:	The Weston Wayland Compositor
 Name:		weston
 Version:	13.0.0
-Release:	1
+Release:	2
 License:	MIT
 Group:		Graphics
 Url:		http://wayland.freedesktop.org/
@@ -58,7 +58,8 @@ BuildRequires:	pkgconfig(xcb-xfixes)
 BuildRequires:	pkgconfig(xcursor)
 BuildRequires:	pkgconfig(xkbcommon) >= 0.3.0
 BuildRequires:	pkgconfig(libsystemd)
-BuildRequires:	pkgconfig(freerdp2)
+# FIXME re-enable when weston is ported to freerdp 3
+#BuildRequires:	pkgconfig(freerdp2)
 BuildRequires:	pkgconfig(libevdev)
 BuildRequires:	pkgconfig(gstreamer-1.0)
 BuildRequires:	pkgconfig(gstreamer-allocators-1.0)
@@ -114,8 +115,12 @@ Common headers for weston.
 %autosetup -p1
 
 %build
+# FIXME re-enable backend-rdp when weston is ported to freerdp 3
+# FIXME re-enable backend-vnc when weston is ported to current neatvnc
 %meson \
     -Dtest-junit-xml=false \
+    -Dbackend-rdp=false \
+    -Dbackend-vnc=false \
 %if %{with pipewire}
     -Dpipewire=true \
     -Dbackend-pipewire=true
@@ -146,7 +151,7 @@ install -m644 %{SOURCE3} %{buildroot}%{_userunitdir}/%{name}.service
 %files
 %dir %{_sysconfdir}/xdg/%{name}
 %config(noreplace) %{_sysconfdir}/xdg/%{name}/%{name}.ini
-%config %{_sysconfdir}/pam.d/weston-remote-access
+#config %{_sysconfdir}/pam.d/weston-remote-access
 %{_userunitdir}/%{name}.s*
 %{_bindir}/%{name}
 %{_bindir}/%{name}-debug
@@ -166,13 +171,11 @@ install -m644 %{SOURCE3} %{buildroot}%{_userunitdir}/%{name}.service
 %{_libdir}/lib%{name}-%{abi}/drm-backend.so
 %{_libdir}/lib%{name}-%{abi}/gl-renderer.so
 %{_libdir}/lib%{name}-%{abi}/headless-backend.so
-%{_libdir}/lib%{name}-%{abi}/vnc-backend.so
 %if %{with pipewire}
 %{_libdir}/lib%{name}-%{abi}/pipewire-plugin.so
 %{_libdir}/libweston-%{abi}/pipewire-backend.so
 %endif
 %{_libdir}/lib%{name}-%{abi}/color-lcms.so
-%{_libdir}/lib%{name}-%{abi}/rdp-backend.so
 %{_libdir}/lib%{name}-%{abi}/remoting-plugin.so
 %{_libdir}/lib%{name}-%{abi}/wayland-backend.so
 %{_libdir}/lib%{name}-%{abi}/x11-backend.so
