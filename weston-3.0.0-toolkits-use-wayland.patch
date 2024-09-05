@@ -1,6 +1,6 @@
-diff -up weston-10.0.0/compositor/main.c.1~ weston-10.0.0/compositor/main.c
---- weston-10.0.0/compositor/main.c.1~	2022-02-12 23:38:04.735238639 +0100
-+++ weston-10.0.0/compositor/main.c	2022-02-12 23:48:43.380342258 +0100
+diff -up weston-10.0.0/frontend/main.c.1~ weston-10.0.0/frontend/main.c
+--- weston-10.0.0/frontend/main.c.1~	2022-02-12 23:38:04.735238639 +0100
++++ weston-10.0.0/frontend/main.c	2022-02-12 23:48:43.380342258 +0100
 @@ -3500,6 +3500,12 @@ wet_main(int argc, char *argv[], const s
  		fd = -1;
  	}

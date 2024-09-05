@@ -1,15 +1,15 @@
 %global optflags %{optflags} -Wno-error=implicit-function-declaration -Wno-error=int-conversion
 %global build_ldflags %{build_ldflags} -Wl,-z,undefs -Wl,--allow-shlib-undefined
 
-%define abi 13
+%define abi 14
 %define major 0
 
 %bcond_without pipewire
 
 Summary:	The Weston Wayland Compositor
 Name:		weston
-Version:	13.0.3
-Release:	2
+Version:	14.0.0
+Release:	1
 License:	MIT
 Group:		Graphics
 Url:		http://wayland.freedesktop.org/
