@@ -12,7 +12,7 @@ Version:	14.0.0
 Release:	1
 License:	MIT
 Group:		Graphics
-Url:		http://wayland.freedesktop.org/
+Url:		https://wayland.freedesktop.org/
 Source0:	https://gitlab.freedesktop.org/wayland/weston/-/releases/%{version}/downloads/%{name}-%{version}.tar.xz
 Source1:	weston.ini
 Source2:	weston.socket
