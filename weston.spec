@@ -8,7 +8,7 @@
 
 Summary:	The Weston Wayland Compositor
 Name:		weston
-Version:	14.0.0
+Version:	14.0.1
 Release:	1
 License:	MIT
 Group:		Graphics
