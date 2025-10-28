@@ -19,6 +19,7 @@ Source2:	weston.socket
 Source3:	weston.service
 # not move me
 Patch0:		weston-3.0.0-toolkits-use-wayland.patch
+Patch1:     weston-libdisplay-info-0.3.0.patch
 BuildRequires:	meson
 BuildRequires:	pkgconfig(cairo) >= 1.10.0
 BuildRequires:	pkgconfig(wayland-egl)
