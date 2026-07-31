@@ -8,8 +8,8 @@
 
 Summary:	The Weston Wayland Compositor
 Name:		weston
-Version:	14.0.2
-Release:	2
+Version:	16.0.0
+Release:	1
 License:	MIT
 Group:		Graphics
 Url:		https://wayland.freedesktop.org/
@@ -18,8 +18,8 @@ Source1:	weston.ini
 Source2:	weston.socket
 Source3:	weston.service
 # not move me
-Patch0:		weston-3.0.0-toolkits-use-wayland.patch
-Patch1:     weston-libdisplay-info-0.3.0.patch
+# dropped (no longer applies): Patch0:		weston-3.0.0-toolkits-use-wayland.patch
+# dropped (no longer applies): Patch1:     weston-libdisplay-info-0.3.0.patch
 BuildRequires:	meson
 BuildRequires:	pkgconfig(cairo) >= 1.10.0
 BuildRequires:	pkgconfig(wayland-egl)
