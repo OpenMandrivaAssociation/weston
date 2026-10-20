@@ -1,14 +1,14 @@
 %global optflags %{optflags} -Wno-error=implicit-function-declaration -Wno-error=int-conversion
 %global build_ldflags %{build_ldflags} -Wl,-z,undefs -Wl,--allow-shlib-undefined
 
-%define abi 14
+%define abi 16
 %define major 0
 
 %bcond_without pipewire
 
 Summary:	The Weston Wayland Compositor
 Name:		weston
-Version:	16.0.0
+Version:	16.0.1
 Release:	1
 License:	MIT
 Group:		Graphics
@@ -64,14 +64,20 @@ BuildRequires:	pkgconfig(libsystemd)
 BuildRequires:	pkgconfig(libevdev)
 BuildRequires:	pkgconfig(gstreamer-1.0)
 BuildRequires:	pkgconfig(gstreamer-allocators-1.0)
+BuildRequires:	pkgconfig(gstreamer-app-1.0)
+BuildRequires:	pkgconfig(gstreamer-video-1.0)
 BuildRequires:	pkgconfig(neatvnc)
 %if %{with pipewire}
 BuildRequires:	pkgconfig(libpipewire-0.3)
+BuildRequires:	pkgconfig(libspa-0.2)
 %endif
 BuildRequires:	pam-devel
 BuildRequires:	pkgconfig(libjpeg)
 BuildRequires:	pkgconfig(libseat)
 BuildRequires:	pkgconfig(libdisplay-info)
+BuildRequires:	pkgconfig(lua) >= 5.4
+BuildRequires:	pkgconfig(vulkan)
+BuildRequires:	glslang
 Requires:	xkeyboard-config
 Requires:	dri-drivers
 Requires:	seatd
@@ -81,6 +87,8 @@ Obsoletes:	%{mklibname weston-10} < 13.0.0
 Obsoletes:	%{mklibname weston-10 0} < 13.0.0
 Obsoletes:	%{mklibname weston-11} < 13.0.0
 Obsoletes:	%{mklibname weston-11 0} < 13.0.0
+Obsoletes:	%{mklibname weston-14} < %{EVRD}
+Obsoletes:	%{mklibname weston-14 0} < %{EVRD}
 
 %libpackage weston-%{abi} %{major}
 
@@ -118,16 +126,19 @@ Common headers for weston.
 %build
 # FIXME re-enable backend-rdp when weston is ported to freerdp 3
 # FIXME re-enable backend-vnc when weston is ported to current neatvnc
+# -Dpipewire was renamed. Keep the deprecated DRM output plugins so
+# existing remoting and pipewire output configs still load.
 %meson \
     -Dtest-junit-xml=false \
     -Dbackend-rdp=false \
     -Dbackend-vnc=false \
+    -Ddeprecated-remoting=true \
 %if %{with pipewire}
-    -Dpipewire=true \
-    -Dbackend-pipewire=true
+    -Dbackend-pipewire=true \
+    -Ddeprecated-pipewire=true
 %else
-    -Dpipewire=false \
-    -Dbackend-pipewire=false
+    -Dbackend-pipewire=false \
+    -Ddeprecated-pipewire=false
 %endif
 
 %meson_build
@@ -158,29 +169,18 @@ install -m644 %{SOURCE3} %{buildroot}%{_userunitdir}/%{name}.service
 %{_bindir}/%{name}-debug
 %{_bindir}/%{name}-content_protection
 %{_bindir}/weston-simple-dmabuf-feedback
-%{_bindir}/wcap-decode
 %{_bindir}/%{name}-tablet
 %{_bindir}/%{name}-terminal
 %{_bindir}/%{name}-touch-calibrator
 %{_bindir}/%{name}-screenshooter
 %{_bindir}/%{name}-simple-dmabuf-egl
 %{_libexecdir}/%{name}-*
+%{_libexecdir}/shell.lua
 %dir %{_libdir}/%{name}
 %{_libdir}/%{name}/libexec_weston.so.0*
 %{_libdir}/%{name}/*.so
 %dir %{_libdir}/lib%{name}-%{abi}
-%{_libdir}/lib%{name}-%{abi}/drm-backend.so
-%{_libdir}/lib%{name}-%{abi}/gl-renderer.so
-%{_libdir}/lib%{name}-%{abi}/headless-backend.so
-%if %{with pipewire}
-%{_libdir}/lib%{name}-%{abi}/pipewire-plugin.so
-%{_libdir}/libweston-%{abi}/pipewire-backend.so
-%endif
-%{_libdir}/lib%{name}-%{abi}/color-lcms.so
-%{_libdir}/lib%{name}-%{abi}/remoting-plugin.so
-%{_libdir}/lib%{name}-%{abi}/wayland-backend.so
-%{_libdir}/lib%{name}-%{abi}/x11-backend.so
-%{_libdir}/lib%{name}-%{abi}/xwayland.so
+%{_libdir}/lib%{name}-%{abi}/*.so
 %dir %{_datadir}/%{name}
 %{_datadir}/wayland-sessions/%{name}.desktop
 %{_datadir}/%{name}/*.png
@@ -191,6 +191,7 @@ install -m644 %{SOURCE3} %{buildroot}%{_userunitdir}/%{name}.service
 %{_bindir}/weston-calibrator
 %{_bindir}/weston-clickdot
 %{_bindir}/weston-cliptest
+%{_bindir}/weston-color
 %{_bindir}/weston-constraints
 %{_bindir}/weston-dnd
 %{_bindir}/weston-editor
@@ -203,16 +204,16 @@ install -m644 %{SOURCE3} %{buildroot}%{_userunitdir}/%{name}.service
 %{_bindir}/weston-resizor
 %{_bindir}/weston-scaler
 %{_bindir}/weston-simple-damage
-%{_bindir}/weston-content_protection
-%{_bindir}/weston-simple-dmabuf-egl
 %{_bindir}/weston-simple-dmabuf-v4l
+%{_bindir}/weston-simple-dmabuf-vulkan
 %{_bindir}/weston-simple-egl
 %{_bindir}/weston-simple-shm
+%{_bindir}/weston-simple-timing
 %{_bindir}/weston-simple-touch
+%{_bindir}/weston-simple-vulkan
 %{_bindir}/weston-smoke
 %{_bindir}/weston-stacking
 %{_bindir}/weston-subsurfaces
-%{_bindir}/weston-touch-calibrator
 %{_bindir}/weston-transformed
 
 %files devel
